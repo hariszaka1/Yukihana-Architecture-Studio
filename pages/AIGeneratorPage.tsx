@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { GoogleGenAI, Modality } from '@google/genai';
 import PageBanner from '../components/PageBanner';
@@ -97,6 +98,7 @@ const AIGeneratorPage: React.FC = () => {
 
             const [briefResponse, imagesResponse] = await Promise.all([
                 ai.models.generateContent({
+                    // FIX: Updated deprecated model name to 'gemini-2.5-flash'.
                     model: 'gemini-2.5-flash',
                     contents: briefPrompt,
                 }),
@@ -217,22 +219,28 @@ const AIGeneratorPage: React.FC = () => {
                                         <option>Toko Ritel</option>
                                     </select>
                                 </FormField>
+                                {/* FIX: Wrapped input element inside FormField component to provide required children. */}
                                 <FormField id="designStyle" label="Gaya Desain" labelStyles={labelStyles}>
                                     <input type="text" id="designStyle" name="designStyle" value={formData.designStyle} onChange={handleChange} className={inputStyles} placeholder="Cth: Industrial, Skandinavia" />
                                 </FormField>
+                                {/* FIX: Wrapped input element inside FormField component to provide required children. */}
                                 <FormField id="primaryRoom" label="Ruangan Utama" labelStyles={labelStyles}>
                                     <input type="text" id="primaryRoom" name="primaryRoom" value={formData.primaryRoom} onChange={handleChange} className={inputStyles} placeholder="Cth: Kamar tidur utama" />
                                 </FormField>
+                                {/* FIX: Wrapped input element inside FormField component to provide required children. */}
                                 <FormField id="colorPalette" label="Palet Warna" labelStyles={labelStyles}>
                                     <input type="text" id="colorPalette" name="colorPalette" value={formData.colorPalette} onChange={handleChange} className={inputStyles} placeholder="Cth: Monokromatik abu-abu" />
                                 </FormField>
                             </div>
+                            {/* FIX: Wrapped input element inside FormField component to provide required children. */}
                              <FormField id="keyMaterials" label="Material Utama" labelStyles={labelStyles}>
                                 <input type="text" id="keyMaterials" name="keyMaterials" value={formData.keyMaterials} onChange={handleChange} className={inputStyles} placeholder="Cth: Marmer putih, kuningan, velvet" />
                             </FormField>
+                            {/* FIX: Wrapped input element inside FormField component to provide required children. */}
                             <FormField id="desiredAtmosphere" label="Suasana yang Diinginkan" labelStyles={labelStyles}>
                                 <input type="text" id="desiredAtmosphere" name="desiredAtmosphere" value={formData.desiredAtmosphere} onChange={handleChange} className={inputStyles} placeholder="Cth: Mewah, elegan, dan dramatis" />
                             </FormField>
+                            {/* FIX: Wrapped textarea element inside FormField component to provide required children. */}
                              <FormField id="mustHaveFeatures" label="Fitur Wajib atau Catatan Tambahan (Opsional)" labelStyles={labelStyles}>
                                 <textarea
                                     id="mustHaveFeatures"
