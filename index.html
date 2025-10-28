@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yukihana Architecture Studio - Arsitektur & Interior</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'brand-dark': '#0B1B2B',          // Deep Blue (Dark Mode BG)
+            'brand-accent-dark': '#122C44',     // Darker Blue for gradient
+            'brand-gray': '#D9D9D9',          // Soft Gray (for dark text)
+            'brand-yellow': '#D97706',        // NEW: Burnt Orange/Terracotta (Accent)
+            'whatsapp-green': '#25D366',
+            'whatsapp-green-dark': '#1EBE5D',
+            'brand-light': '#F8F5F2',         // NEW: Warm Cream (Light Mode BG)
+            'brand-text-light': '#3D352E',    // NEW: Charcoal Brown (Light Mode Text)
+            'brand-text-muted': '#6B5F55',     // NEW: Muted text for prose
+          },
+          height: {
+             'screen-75': '75vh',
+          },
+          fontFamily: {
+            sans: ['Helvetica', 'Arial', 'sans-serif'],
+          },
+          keyframes: {
+            'fade-in-up': {
+              '0%': { opacity: 0, transform: 'translateY(40px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+            'fade-in-down': {
+              '0%': { opacity: 0, transform: 'translateY(-20px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+            'slide-in-right': {
+                '0%': { transform: 'translateX(100%)' },
+                '100%': { transform: 'translateX(0)' },
+            },
+            'fade-in': {
+                '0%': { opacity: 0 },
+                '100%': { opacity: 1 },
+            },
+            'ken-burns-in': {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.15)' },
+            },
+            'circle-wipe-in': {
+              'from': { 'clip-path': 'circle(0% at 50% 50%)' },
+              'to': { 'clip-path': 'circle(150vmax at 50% 50%)' },
+            },
+            'circle-wipe-out': {
+              'from': { 'clip-path': 'circle(150vmax at 50% 50%)' },
+              'to': { 'clip-path': 'circle(0% at 50% 50%)' },
+            },
+          },
+          animation: {
+            'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+            'fade-in-down': 'fade-in-down 0.8s ease-out forwards',
+            'slide-in-right': 'slide-in-right 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+            'fade-in': 'fade-in 0.5s ease-out both',
+            'ken-burns-in': 'ken-burns-in 7s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass-panel {
+        @apply bg-white/[.50] dark:bg-white/[.08] backdrop-blur-xl border border-black/10 dark:border-white/20 rounded-2xl shadow-2xl;
+      }
+      .glass-button {
+        @apply glass-panel px-8 py-3 font-semibold text-center uppercase tracking-wider transition-all duration-300 text-brand-text-light dark:text-white hover:bg-black/10 dark:hover:bg-white/20 focus:outline-none;
+      }
+      .glow-on-hover {
+        @apply hover:shadow-[0_0_15px_rgba(217,119,6,0.4)];
+      }
+      .nav-link-underline {
+        @apply relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-bottom-right after:scale-x-0 after:bg-brand-yellow after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+      }
+      .prose {
+        @apply text-brand-text-muted dark:text-brand-gray;
+      }
+      .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+        @apply text-brand-text-light dark:text-white;
+      }
+      .prose-lg h2 {
+        @apply !text-xl sm:!text-2xl;
+      }
+      .prose-lg h3 {
+        @apply !text-lg sm:!text-xl;
+      }
+      .prose strong {
+        @apply text-brand-text-light dark:text-white;
+      }
+      .prose p {
+        @apply text-brand-text-muted dark:text-brand-gray;
+      }
+    }
+    body {
+        @apply font-sans text-brand-text-light dark:text-white bg-brand-light;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+    .dark body {
+        background-color: theme('colors.brand-dark');
+        background-image: linear-gradient(135deg, theme('colors.brand-dark'), theme('colors.brand-accent-dark'));
+    }
+    /* Page Transition Styles */
+    #page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      pointer-events: none;
+      background-color: theme('colors.brand-dark');
+      clip-path: circle(0% at 50% 50%); /* Start clipped */
+    }
+    #page-transition-overlay .logo-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+    }
+    #page-transition-overlay.animating-in {
+      animation: circle-wipe-in 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    #page-transition-overlay.animating-in .logo-container {
+        opacity: 1;
+        transition-delay: 0.2s;
+    }
+    #page-transition-overlay.animating-out {
+      animation: circle-wipe-out 0.7s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.1/",
+    "react/": "https://esm.sh/react@^19.1.1/",
+    "react": "https://esm.sh/react@^19.1.1",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.8.0",
+    "@google/genai": "https://esm.sh/@google/genai"
+  }
+}
+</script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

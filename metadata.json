@@ -1,0 +1,7 @@
+{
+  "name": " Yukihana Architecture Studio 2.0",
+  "description": "A portfolio website for Yukihana Architecture Studio, an architecture and interior design firm. Showcasing projects, services, and company information.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
